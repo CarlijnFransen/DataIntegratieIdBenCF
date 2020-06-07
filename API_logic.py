@@ -4,7 +4,10 @@ import csv
 
 def main():
     header, input_attribute, row_counter = read_input_file()
-    make_dictionary(header, input_attribute, row_counter)
+    input_dict = make_dictionary(header, input_attribute, row_counter)
+    calculate_frequency(input_dict)
+    return_json()
+
 
 def read_input_file():
     # input file is file send to api
@@ -26,48 +29,50 @@ def read_input_file():
 
 def make_dictionary(header, input_attribute, row_counter):
     # a dictionary filled with the input data is made
-    input_dict = {}
-    x = 0
-    i = 0
-    for item in header:
-        for category in item:
-            # 0,1,2 etc moeten 0 tot en met row_counter worden!
-            key = category
-            input_dict.setdefault(key, [])
-            while i < row_counter:
-                input_dict[key].append(input_attribute[i][x])
-                i += 1
-            x += 1
-    print(input_dict)
+    # krijg de dict niet volledig gevuld
 
-# # calculate cancer frequency and generate notification for now
-# cancer_freq = {}
-# x = 0
-# for number in freq:
-#     cancer_freq[x] = (1 - number)
-#     if 0 < cancer_freq[x] < 0.01:
-#         print('Dangerous!')
-#     x += 1
-#
-# # fake database for the time being
-# nep_database = {
-#     "chromosome": [8, 10, 4],
-#     "position": [1520, 465, 752],
-#     "frequency": [0.0045, 0.8872, 0.7520],
-#     "reference_nucleotide": ["A", "G", "T"],
-#     "alternative_nucleotide": ["C", "H", "T"]
-# }
-#
-# #  data = {
-# #      "chromosomes": chrom,
-# #      "positions": pos,
-# #      "frequence": freq,
-# #      "reference": ref,
-# #      "alternative": alt
-# #
-#
-# #  with open('output.json', 'w', encoding='utf-8') as f:
-# #      json.dump(data, f, ensure_ascii=False, indent=4)
+    # input_dict = {}
+    # x = 0
+    # i = 0
+    # for item in header:
+    #     for category in item:
+    #         key = category
+    #         input_dict.setdefault(key, [])
+    #         while i < row_counter:
+    #             input_dict[key].append(input_attribute[i][x])
+    #             i += 1
+    #     x += 1
+    # print(input_dict)
+
+    # weghalen als functie hierboven werkt
+    input_dict = {
+      "chromosome": [8, 9, 1],
+      "position": [1520, 465, 13],
+      "frequency": [0.0045, 0.99564, 0.00556],
+      "reference_nucleotide": ["A", "C", "T"],
+      "alternative_nucleotide": ["C", "G", "T"]
+    }
+    return input_dict
+
+
+def calculate_frequency(input_dict):
+    # calculate cancer frequency and generate notification for now
+    cancer_freq = {}
+    freq = input_dict.get('frequency')
+    x = 0
+    for number in freq:
+        cancer_freq[x] = (1 - number)
+        if 0 < cancer_freq[x] < 0.01:
+            print('Dangerous!')
+        x += 1
+    # nog even kijken wat dit returned
+
+
+def return_json():
+    #data = {}
+    # chrom, pos, freq, ref, alt, benign, cancer = opbouw
+    with open('output.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
 
 
 main()
