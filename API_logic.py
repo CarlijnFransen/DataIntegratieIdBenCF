@@ -20,7 +20,7 @@ def read_input_file():
             else:
                 input_attribute.append(row)
             row_counter += 1
-    row_counter + row_counter - 2
+    row_counter = row_counter - 1
     return header, input_attribute, row_counter
 
 
@@ -28,14 +28,15 @@ def make_dictionary(header, input_attribute, row_counter):
     # a dictionary filled with the input data is made
     input_dict = {}
     x = 0
+    i = 0
     for item in header:
         for category in item:
             # 0,1,2 etc moeten 0 tot en met row_counter worden!
             key = category
             input_dict.setdefault(key, [])
-            input_dict[key].append(input_attribute[0][x])
-            input_dict[key].append(input_attribute[1][x])
-            input_dict[key].append(input_attribute[2][x])
+            while i < row_counter:
+                input_dict[key].append(input_attribute[i][x])
+                i += 1
             x += 1
     print(input_dict)
 
