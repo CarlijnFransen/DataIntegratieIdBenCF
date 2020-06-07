@@ -25,16 +25,14 @@ def read_input_file():
 
 
 def make_dictionary(header, input_attribute, row_counter):
+    # a dictionary filled with the input data is made
     input_dict = {}
     x = 0
     for item in header:
         for category in item:
-            while x < row_counter:
-                input_dict[category] = input_attribute[0][x]
-                x += 1
+            input_dict[category] = input_attribute[0][x]
+            x += 1
     print(input_dict)
-
-
 
 # # calculate cancer frequency and generate notification for now
 # cancer_freq = {}
