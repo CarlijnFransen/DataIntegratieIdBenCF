@@ -30,7 +30,12 @@ def make_dictionary(header, input_attribute, row_counter):
     x = 0
     for item in header:
         for category in item:
-            input_dict[category] = input_attribute[0][x]
+            # 0,1,2 etc moeten 0 tot en met row_counter worden!
+            key = category
+            input_dict.setdefault(key, [])
+            input_dict[key].append(input_attribute[0][x])
+            input_dict[key].append(input_attribute[1][x])
+            input_dict[key].append(input_attribute[2][x])
             x += 1
     print(input_dict)
 
