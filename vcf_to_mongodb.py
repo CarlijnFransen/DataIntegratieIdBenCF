@@ -11,12 +11,18 @@ def main():
 
 
 def read_vcf(con):
-    vcf_reader = vcf.Reader(open('D:/BIN-1920/gnomad.exomes.r2.1.1.sites.13.vcf'))
+    vcf_reader = vcf.Reader(open('/media/carlijnfransen/HD_CarlijnFransen/BIN-1920/gnomad.exomes.r2.1.1.sites.13.vcf'))
     for record in vcf_reader:
+        alt = []
         chrom = record.CHROM
+        #print(chrom)
         pos = record.POS
+        #print(pos)
         ref = record.REF
-        alt = record.ALT
+        #print(ref)
+        for element in record.ALT:
+            alt.append(str(element))
+        #print(alt)
         try:
             non_cancer_af = record.INFO['non_cancer_AF'][0]
         except KeyError:
@@ -30,27 +36,11 @@ def read_vcf(con):
 
 
 def create_db_connection():
-    client = pymongo.MongoClient("mongodb://localhost:27017/")
+    client = pymongo.MongoClient("mongodb://localhost/")
     db = client['cancer_api']
     col =  db['exome_data']
     return col
 
-def read_vcf():
-    # vcf_reader = vcf.Reader(open('D:\\BIN-1920\\gnomad.exomes.r2.1.1.sites.13.vcf'))
-    vcf_reader = vcf.Reader(open('D:\\ZZhier\\gnomad.exomes.r2.1.1.sites.13.vcf'))
-    for record in vcf_reader:
-        for x in record.INFO:
-            print(x)
-            if x == 'non_cancer_AF':
-                pass
-        break
-
-
-def create_db_connection():
-    client = pymongo.MongoClient("localhost", 27017)
-    db = client.cancer_api
-    posts = db.posts
-    return posts
 
 
 def calculate_cancer_af(non_cancer_af):
@@ -81,6 +71,7 @@ def create_document(chrom, pos, ref, alt, cancer_af):
 
 def add_document(document, con):
     # adds document as json/dictionary style format to the MongoDB database
+    print(document)
     con.insert_one(document)
 
 
