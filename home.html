@@ -4,15 +4,18 @@
 
 <h1 title="header">Data integratie blok 10</h1>
 
-<p title="I'm a tooltip"> Welcome to our application! <br>
+<p title="welcome"> Welcome to our application! <br>
     <b>Made by:</b> Carlijn Fransen & Ilse den Brok <br> <b>Date:</b> 23-05-2020 <br>
     <b>Subject:</b> Data integratie <br> <b>Class:</b> Bin-3d</p>
 
 <hr>
 
 <h2 title="upload">Please upload a file</h2>
-<p> Dear user, please place a request by changing the url to the format: <br>
-http://mijnserver.nl/request?chrom=13&pos=4651&nt=A</p>
+      <form action = "http://localhost:5000/results" method = "POST"
+          enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <input type = "submit"/>
+      </form>
 
 
 </body>
