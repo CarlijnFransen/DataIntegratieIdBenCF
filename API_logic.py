@@ -3,8 +3,8 @@ import csv
 
 
 def main():
-    header, input_attribute, row_counter = read_input_file()
-    input_dict = make_dictionary(header, input_attribute, row_counter)
+    input_attribute = read_input_file()
+    input_list = structure_list(input_attribute)
 
 
 def read_input_file():
@@ -21,36 +21,21 @@ def read_input_file():
             else:
                 input_attribute.append(row)
             row_counter += 1
-    row_counter = row_counter - 1
-    return header, input_attribute, row_counter
+    return input_attribute
 
 
-def make_dictionary(header, input_attribute, row_counter):
-    # a dictionary filled with the input data is made
-    # krijg de dict niet volledig gevuld
-
-    # input_dict = {}
-    # x = 0
-    # i = 0
-    # for item in header:
-    #     for category in item:
-    #         key = category
-    #         input_dict.setdefault(key, [])
-    #         while i < row_counter:
-    #             input_dict[key].append(input_attribute[i][x])
-    #             i += 1
-    #     x += 1
-    # print(input_dict)
-
-    # weghalen als functie hierboven werkt
-    input_dict = {
-      "chromosome": [8, 9, 1],
-      "position": [1520, 465, 13],
-      "frequency": [0.0045, 0.99564, 0.00556],
-      "reference_nucleotide": ["A", "C", "T"],
-      "alternative_nucleotide": ["C", "G", "T"]
-    }
-    return input_dict
+def structure_list(input_attribute):
+    # a structured list filled with the input data is made
+    input_list = []
+    for line in input_attribute:
+        if len(line) == 4:
+            regel = line[0] + '_' + line[1] + '_' + line[2] + '_' + line[3]
+            input_list.append(regel)
+            print(regel)
+        else:
+            # change this to api popup
+            print('One or more of your entries did not contain all 4 elements, these will be ignored')
+    return input_list
 
 
 def return_json():
