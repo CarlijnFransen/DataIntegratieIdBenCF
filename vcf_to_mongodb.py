@@ -46,9 +46,9 @@ def read_vcf(con):
 
 
 def create_db_connection():
-    client = pymongo.MongoClient("mongodb://localhost/")
+    client = pymongo.MongoClient("mongodb://localhost:27017/")
     db = client['cancer_api']
-    col = db['exome_data']
+    col = db['exomes13_data']
     return col
 
 

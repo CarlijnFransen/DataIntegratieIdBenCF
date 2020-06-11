@@ -3,17 +3,53 @@ Author: Carlijn Fransen
 Date: 11 June 2020
 Project: functions for querying mongodb database
 """
+import pymongo
+import API_logic
+
+
+def main():
+    """
+
+    :return:
+    """
+    input_attribute = API_logic.read_input_file()
+    id_list = API_logic.structure_list(input_attribute)
+    collection = connection_db()
+    create_query(id_list, collection)
+
 
 def connection_db():
+    """
+
+    :return:
+    """
     client = pymongo.MongoClient("mongodb://localhost/")
     db = client['cancer_api']
-    col = db['exome_data']
+    col = db['exomes13_data']
     return col
 
+
 def create_query(api_input_list, col):
+    """
+
+    :param api_input_list: list with ids
+    :param col: connection collection
+    :return: json for
+    """
+    doc_list = []
     for x in api_input_list:
         query = {"_id": x}
+        print(query)
+        document = get_query(col, query)
+        doc_list.append(document)
+    return doc_list
 
 
 def get_query(col, query):
+    d= " "
     doc = col.find(query)
+    for d in doc:
+        print(True)
+    return d
+
+main()
