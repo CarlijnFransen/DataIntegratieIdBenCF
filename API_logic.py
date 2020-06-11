@@ -1,3 +1,4 @@
+
 import json
 import csv
 
@@ -54,18 +55,6 @@ def make_dictionary(header, input_attribute, row_counter):
     }
     return input_dict
 
-
-def calculate_frequency(input_dict):
-    # calculate cancer frequency and generate notification for now
-    cancer_freq = {}
-    freq = input_dict.get('frequency')
-    x = 0
-    for number in freq:
-        cancer_freq[x] = (1 - number)
-        if 0 < cancer_freq[x] < 0.01:
-            print('Dangerous!')
-        x += 1
-    # nog even kijken wat dit returned
 
 
 def return_json():
