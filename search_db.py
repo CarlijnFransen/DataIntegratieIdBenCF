@@ -1,3 +1,4 @@
+
 """
 Author: Carlijn Fransen
 Date: 11 June 2020
@@ -5,11 +6,11 @@ Project: functions for querying mongodb database
 """
 import pymongo
 import API_logic
+import json 
 
 
 def main():
     """
-
     :return:
     """
     input_attribute = API_logic.read_input_file()
@@ -20,7 +21,6 @@ def main():
 
 def connection_db():
     """
-
     :return:
     """
     client = pymongo.MongoClient("mongodb://localhost/")
@@ -31,7 +31,6 @@ def connection_db():
 
 def create_query(api_input_list, col):
     """
-
     :param api_input_list: list with ids
     :param col: connection collection
     :return: json for
@@ -42,6 +41,8 @@ def create_query(api_input_list, col):
         print(query)
         document = get_query(col, query)
         doc_list.append(document)
+        with open('output.json', 'w', encoding='utf-8') as f:
+            json.dump(doc_list, f, ensure_ascii=False, indent=4)
     return doc_list
 
 
