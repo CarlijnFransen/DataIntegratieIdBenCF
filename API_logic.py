@@ -5,8 +5,6 @@ import csv
 def main():
     header, input_attribute, row_counter = read_input_file()
     input_dict = make_dictionary(header, input_attribute, row_counter)
-    calculate_frequency(input_dict)
-    return_json()
 
 
 def read_input_file():
@@ -53,19 +51,6 @@ def make_dictionary(header, input_attribute, row_counter):
       "alternative_nucleotide": ["C", "G", "T"]
     }
     return input_dict
-
-
-def calculate_frequency(input_dict):
-    # calculate cancer frequency and generate notification for now
-    cancer_freq = {}
-    freq = input_dict.get('frequency')
-    x = 0
-    for number in freq:
-        cancer_freq[x] = (1 - number)
-        if 0 < cancer_freq[x] < 0.01:
-            print('Dangerous!')
-        x += 1
-    # nog even kijken wat dit returned
 
 
 def return_json():
