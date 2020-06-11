@@ -27,7 +27,7 @@ def structure_list(input_attribute):
         if len(line) == 4:
             regel = line[0] + '_' + line[1] + '_' + line[2] + '_' + line[3]
             input_list.append(regel)
-            print(regel)
+            sprint(regel)
         else:
             # change this to api popup
             print('One or more of your entries did not contain all 4 elements, these will be ignored')

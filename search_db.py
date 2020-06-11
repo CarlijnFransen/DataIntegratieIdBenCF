@@ -25,7 +25,7 @@ def connection_db():
     """
     client = pymongo.MongoClient("mongodb://localhost/")
     db = client['cancer_api']
-    col = db['exomes13_data']
+    col = db['exomes13v2_data']
     return col
 
 

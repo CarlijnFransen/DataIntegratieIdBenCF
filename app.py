@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from werkzeug import secure_filename
-
+import search_db.py
 app = Flask(__name__)
 
 
@@ -19,8 +19,9 @@ def upload_file():
     if request.method == 'POST':
         f = request.files['file']
         f.save(secure_filename(f.filename))
+        search_db.main()
     return 'file uploaded successfully'
 
 
-if __name__ == "__main__":
-    app.run()
+#if __name__ == "__main__":
+    #app.run()

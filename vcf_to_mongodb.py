@@ -11,7 +11,7 @@ def main():
 
 
 def read_vcf(con):
-    vcf_reader = vcf.Reader(open('/media/carlijnfransen/HD_CarlijnFransen/BIN-1920/gnomad.exomes.r2.1.1.sites.13.vcf'))
+    vcf_reader = vcf.Reader(open('gnomad.exomes.r2.1.1.sites.13.vcf'))
     for record in vcf_reader:
         alt = ""
         chrom = record.CHROM
@@ -48,7 +48,7 @@ def read_vcf(con):
 def create_db_connection():
     client = pymongo.MongoClient("mongodb://localhost:27017/")
     db = client['cancer_api']
-    col = db['exomes13_data']
+    col = db['exomes13v2_data']
     return col
 
 
