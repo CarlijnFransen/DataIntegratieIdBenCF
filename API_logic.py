@@ -9,7 +9,7 @@ def main():
 
 def read_input_file():
     # input file is file send to api
-    input_file = "D:\\Documents\\Bio-informatica jaar 3\\data integratie\\input_file.txt"
+    input_file = "input_file.txt"
     with open(input_file, 'r') as file:
         reader = csv.reader(file)
         input_attribute = []
